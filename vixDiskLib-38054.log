@@ -1,0 +1,65 @@
+2025-05-17T13:21:03.395Z In(05) host-38054 Log for VMware Workstation pid=38054 version=e.x.p build=build-20521017 option=Release
+2025-05-17T13:21:03.395Z In(05) host-38054 The host is x86_64.
+2025-05-17T13:21:03.395Z In(05) host-38054 Host codepage=UTF-8 encoding=UTF-8
+2025-05-17T13:21:03.395Z In(05) host-38054 Host is Linux 6.8.0-59-generic Ubuntu 24.04.2 LTS Ubuntu 24.04.2 LTS 24.04
+2025-05-17T13:21:03.395Z In(05) host-38054 Host offset from UTC is +02:00.
+2025-05-17T13:21:03.430Z In(05) host-38054 OBJLIB-LIB: Objlib initialized.
+2025-05-17T13:21:03.430Z In(05) host-38054 DictionaryLoad: Cannot open file "/etc/vmware/config": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 [msg.dictionary.load.openFailed] Cannot open file "/etc/vmware/config": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 PREF Optional preferences file not found at /etc/vmware/config. Using default values.
+2025-05-17T13:21:03.430Z In(05) host-38054 DictionaryLoad: Cannot open file "/usr/lib/vmware/settings": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 [msg.dictionary.load.openFailed] Cannot open file "/usr/lib/vmware/settings": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 PREF Optional preferences file not found at /usr/lib/vmware/settings. Using default values.
+2025-05-17T13:21:03.430Z In(05) host-38054 DictionaryLoad: Cannot open file "/usr/lib/vmware/config": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 [msg.dictionary.load.openFailed] Cannot open file "/usr/lib/vmware/config": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 PREF Optional preferences file not found at /usr/lib/vmware/config. Using default values.
+2025-05-17T13:21:03.430Z In(05) host-38054 DictionaryLoad: Cannot open file "/home/florent/.vmware/config": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 [msg.dictionary.load.openFailed] Cannot open file "/home/florent/.vmware/config": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 PREF Optional preferences file not found at /home/florent/.vmware/config. Using default values.
+2025-05-17T13:21:03.430Z In(05) host-38054 DictionaryLoad: Cannot open file "/home/florent/.vmware/preferences": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 [msg.dictionary.load.openFailed] Cannot open file "/home/florent/.vmware/preferences": No such file or directory.
+2025-05-17T13:21:03.430Z In(05) host-38054 PREF Optional preferences file not found at /home/florent/.vmware/preferences. Using default values.
+2025-05-17T13:21:03.431Z In(05) host-38054 lib/ssl: OpenSSL using FIPS_drbg for RAND
+2025-05-17T13:21:03.431Z In(05) host-38054 lib/ssl: protocol list tls1.2
+2025-05-17T13:21:03.431Z In(05) host-38054 lib/ssl: protocol list tls1.2 (openssl flags 0x17000000)
+2025-05-17T13:21:03.431Z In(05) host-38054 lib/ssl: cipher list ECDHE+AESGCM:RSA+AESGCM:ECDHE+AES:RSA+AES
+2025-05-17T13:21:03.431Z In(05) host-38054 lib/ssl: curves list prime256v1:secp384r1:secp521r1
+2025-05-17T13:21:03.431Z In(05) host-38054 PANIC: VERIFY bora/lib/ssl/ssl.c:2002
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace:
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[0] 00007ffebd403070 rip=0000761ec839188b rbx=0000000000000029 rbp=00007ffebd403070 r12=00000000055d65e0 r13=00007ffebd4034a8 r14=0000000000000028 r15=0000000000000000
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[1] 00007ffebd4034a0 rip=0000761ec826f3bc rbx=0000000000000029 rbp=000000003f5a2320 r12=0000761ea0eb6aa0 r13=0000761ec83dc6d5 r14=0000000000000028 r15=0000000000000000
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[2] 00007ffebd403580 rip=0000761ec827044a rbx=0000000000000029 rbp=000000003f5a2320 r12=0000761ea0eb6aa0 r13=0000761ec83dc6d5 r14=0000000000000028 r15=0000000000000000
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[3] 00007ffebd4035a0 rip=0000761ec827eb1f rbx=0000000000000029 rbp=00007ffebd4035a0 r12=000000003f5a2820 r13=0000761ec83dc6d5 r14=0000000000000028 r15=0000000000000000
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[4] 00007ffebd403600 rip=0000761ec823d003 rbx=0000000000000000 rbp=000000003f5bf660 r12=0000000000000000 r13=000000003f5d1b90 r14=00007ffebd403690 r15=0000000000000000
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[5] 00007ffebd403770 rip=0000761ec823f1c1 rbx=000000003f5a2fc0 rbp=0000000000000000 r12=00007ffebd4037e0 r13=000000003f5a8350 r14=0000000000c50fc0 r15=000000003f5a9870
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[6] 00007ffebd4037a0 rip=0000761ec903760e rbx=000000003f5a2fc0 rbp=00007ffebd403950 r12=00007ffebd4037e0 r13=000000003f5a8350 r14=0000000000c50fc0 r15=000000003f5a9870
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[7] 00007ffebd403960 rip=0000000000c51049 rbx=000000003f5a8350 rbp=00007ffebd4039b0 r12=0000000000000000 r13=0000000000000000 r14=0000000000c50fc0 r15=000000003f5201e0
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[8] 00007ffebd4039c0 rip=0000000000f57eaf rbx=000000003f50e290 rbp=00007ffebd403a60 r12=00007ffebd403aa0 r13=00000000055ee148 r14=0000000000c50fc0 r15=000000003f5201e0
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[9] 00007ffebd403a70 rip=0000000000f58465 rbx=000000003f55ea90 rbp=00007ffebd403b30 r12=000000003f50e290 r13=00007ffebd403bc0 r14=00007ffebd403be8 r15=000000003f55ea48
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[10] 00007ffebd403b40 rip=0000000000f58b83 rbx=00007ffebd403be8 rbp=00007ffebd403b90 r12=000000003f50e290 r13=000000003f5609d0 r14=000000003f55ea48 r15=0000000000000005
+2025-05-17T13:21:03.431Z In(05) host-38054 Backtrace[11] 00007ffebd403ba0 rip=0000000001963df6 rbx=0000000000f58ad0 rbp=00007ffebd403bb0 r12=000031e59f51a791 r13=000000003f50e310 r14=000031e59f519da1 r15=00007ffebd403be0
+2025-05-17T13:21:03.431Z In(05) host-38054 SymBacktrace[0] 00007ffebd403070 rip=0000761ec839188b in function (null) in object /home/florent/Documents/node-vddk/lib/lib64/libvixDiskLib.so.8.0.0 loaded at 0000761ec8200000
+2025-05-17T13:21:03.431Z In(05) host-38054 SymBacktrace[1] 00007ffebd4034a0 rip=0000761ec826f3bc in function (null) in object /home/florent/Documents/node-vddk/lib/lib64/libvixDiskLib.so.8.0.0 loaded at 0000761ec8200000
+2025-05-17T13:21:03.431Z In(05) host-38054 SymBacktrace[2] 00007ffebd403580 rip=0000761ec827044a in function (null) in object /home/florent/Documents/node-vddk/lib/lib64/libvixDiskLib.so.8.0.0 loaded at 0000761ec8200000
+2025-05-17T13:21:03.431Z In(05) host-38054 SymBacktrace[3] 00007ffebd4035a0 rip=0000761ec827eb1f in function (null) in object /home/florent/Documents/node-vddk/lib/lib64/libvixDiskLib.so.8.0.0 loaded at 0000761ec8200000
+2025-05-17T13:21:03.431Z In(05) host-38054 SymBacktrace[4] 00007ffebd403600 rip=0000761ec823d003 in function (null) in object /home/florent/Documents/node-vddk/lib/lib64/libvixDiskLib.so.8.0.0 loaded at 0000761ec8200000
+2025-05-17T13:21:03.431Z In(05) host-38054 SymBacktrace[5] 00007ffebd403770 rip=0000761ec823f1c1 in function VixDiskLib_InitEx in object /home/florent/Documents/node-vddk/lib/lib64/libvixDiskLib.so.8.0.0 loaded at 0000761ec8200000
+2025-05-17T13:21:03.431Z In(05) host-38054 SymBacktrace[6] 00007ffebd4037a0 rip=0000761ec903760e in function _ZN4Napi10ObjectWrapI11VddkWrapperE26ConstructorCallbackWrapperEP10napi_env__P20napi_callback_info__ in object /home/florent/Documents/node-vddk/build/Release/vddk.node loaded at 0000761ec9026000
+2025-05-17T13:21:03.432Z In(05) host-38054 SymBacktrace[7] 00007ffebd403960 rip=0000000000c51049 in function (null) in object node loaded at 0000000000400000
+2025-05-17T13:21:03.432Z In(05) host-38054 SymBacktrace[8] 00007ffebd4039c0 rip=0000000000f57eaf in function _ZN2v88internal25FunctionCallbackArguments4CallENS0_15CallHandlerInfoE in object node loaded at 0000000000400000
+2025-05-17T13:21:03.433Z In(05) host-38054 SymBacktrace[9] 00007ffebd403a70 rip=0000000000f58465 in function (null) in object node loaded at 0000000000400000
+2025-05-17T13:21:03.433Z In(05) host-38054 SymBacktrace[10] 00007ffebd403b40 rip=0000000000f58b83 in function _ZN2v88internal21Builtin_HandleApiCallEiPmPNS0_7IsolateE in object node loaded at 0000000000400000
+2025-05-17T13:21:03.434Z In(05) host-38054 SymBacktrace[11] 00007ffebd403ba0 rip=0000000001963df6 in function (null) in object node loaded at 0000000000400000
+2025-05-17T13:21:03.434Z Wa(03) host-38054 
+2025-05-17T13:21:03.434Z Wa(03)+ host-38054 The core dump limit is set to ZERO; no core dump should be expected
+2025-05-17T13:21:03.434Z In(05) host-38054 Msg_Post: Error
+2025-05-17T13:21:03.434Z In(05) host-38054 [msg.log.error.unrecoverable] VMware Virtual Disk Development Kit unrecoverable error: (host-38054)
+2025-05-17T13:21:03.434Z In(05)+ host-38054 VERIFY bora/lib/ssl/ssl.c:2002
+2025-05-17T13:21:03.434Z In(05) host-38054 [msg.panic.haveLog] A log file is available in "/tmp/vmware-florent/vixDiskLib-38054.log".  
+2025-05-17T13:21:03.434Z In(05) host-38054 [msg.panic.requestSupport.withoutLog] You can request support.  
+2025-05-17T13:21:03.434Z In(05) host-38054 [msg.panic.requestSupport.vmSupport.windowsOrLinux] 
+2025-05-17T13:21:03.434Z In(05)+ host-38054 To collect data to submit to VMware support, choose "Collect Support Data" from the Help menu.
+2025-05-17T13:21:03.434Z In(05)+ host-38054 You can also run the "vm-support" script in the Workstation folder directly.
+2025-05-17T13:21:03.434Z In(05) host-38054 [msg.panic.response] We will respond on the basis of your support entitlement.
+2025-05-17T13:21:03.434Z In(05) host-38054 ----------------------------------------
+2025-05-17T13:21:03.434Z In(05) host-38054 Exiting
