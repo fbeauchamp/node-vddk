@@ -1,0 +1,20 @@
+{
+  "name": "node-vddk",
+  "version": "1.0.0",
+  "description": "Node.js binding for VMware VDDK",
+  "main": "index.js",
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "build": "node-gyp rebuild",
+    "test": "mocha test/test.js"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^5.0.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^9.0.0",
+    "mocha": "^10.0.0"
+  },
+  "gypfile": true
+}
