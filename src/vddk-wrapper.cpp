@@ -30,14 +30,14 @@ public:
 
     VddkWrapper(const Napi::CallbackInfo& info) : Napi::ObjectWrap<VddkWrapper>(info) {
         Napi::Env env = info.Env();
-        //dlopen("/vagrant/disklib/lib64/libcrypto.so.1.0.2", RTLD_NOW | RTLD_DEEPBIND);
-        //dlopen("/vagrant/disklib/lib64/libssl.so.1.0.2", RTLD_NOW | RTLD_DEEPBIND);
-        //dlopen("/vagrant/disklib/lib64/libvddkVimAccess.so", RTLD_NOW | RTLD_DEEPBIND);
+        dlopen("/vagrant/disklib/lib64/libcrypto.so.1.0.2", RTLD_NOW | RTLD_DEEPBIND);
+        dlopen("/vagrant/disklib/lib64/libssl.so.1.0.2", RTLD_NOW | RTLD_DEEPBIND);
+        dlopen("/vagrant/disklib/lib64/libvddkVimAccess.so", RTLD_NOW | RTLD_DEEPBIND);
         // Initialize VDDK with explicit version
-        VixError err = VixDiskLib_Init(
+        VixError err = VixDiskLib_InitEx(
             VIXDISKLIB_VERSION_MAJOR,
             VIXDISKLIB_VERSION_MINOR,
-            NULL, NULL, NULL, NULL);
+            NULL, NULL, NULL, NULL, NULL);
         printf("\nINIT!\n");
         if (VIX_FAILED(err)) {
             std::string errorMsg = "Failed to initialize VDDK: ";
