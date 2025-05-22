@@ -6,27 +6,22 @@
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")",
         "lib/include",
-        "lib/include/vmware-vix-disklib"
+        "disklib/include"
       ],
-      "libraries": [
-        "-L/home/florent/Documents/node-vddk/lib/lib64",
-        "/home/florent/Documents/node-vddk/lib/lib64/libvixDiskLib.so",
-      ],
+      'link_settings': {
+      	"library_dirs": [
+        	"/vagrant/disklib/lib64",
+      	],
+	    "libraries": [ '-lvixDiskLib', "-ldl" ]
+      },
       "defines": [ "NAPI_DISABLE_CPP_EXCEPTIONS" ],
       "cflags!": [ "-fno-exceptions" ],
       "cflags_cc!": [ "-fno-exceptions" ],
+      'cflags': ['-fPIC', '-L ./disklib/lib64'],
       "conditions": [
         ['OS=="linux"', {
-          "libraries": [
-            "-ldl",
-            "-lpthread",
-            "-lssl",
-            "-lcrypto",
-            "-lxml2",
-            "-lcurl"
-          ],
           "ldflags": [
-            "-Wl,-rpath,<(module_root_dir)/lib/lib64"
+            "-Wl,-rpath=/vagrant/disklib/lib64"
           ]
         }]
       ]

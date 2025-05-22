@@ -1,6 +1,7 @@
 #include <napi.h>
 #include <string>
 #include <cstring>
+#include <dlfcn.h>
 #include "vixDiskLib.h"
 
 // Define version constants if not provided by VDDK 8 headers
@@ -29,21 +30,25 @@ public:
 
     VddkWrapper(const Napi::CallbackInfo& info) : Napi::ObjectWrap<VddkWrapper>(info) {
         Napi::Env env = info.Env();
-        
+        //dlopen("/vagrant/disklib/lib64/libcrypto.so.1.0.2", RTLD_NOW | RTLD_DEEPBIND);
+        //dlopen("/vagrant/disklib/lib64/libssl.so.1.0.2", RTLD_NOW | RTLD_DEEPBIND);
+        //dlopen("/vagrant/disklib/lib64/libvddkVimAccess.so", RTLD_NOW | RTLD_DEEPBIND);
         // Initialize VDDK with explicit version
-        VixError err = VixDiskLib_InitEx(
+        VixError err = VixDiskLib_Init(
             VIXDISKLIB_VERSION_MAJOR,
             VIXDISKLIB_VERSION_MINOR,
-            NULL, NULL, NULL, NULL,
-            NULL);
-        
+            NULL, NULL, NULL, NULL);
+        printf("\nINIT!\n");
         if (VIX_FAILED(err)) {
-            Napi::Error::New(env, "Failed to initialize VDDK").ThrowAsJavaScriptException();
+            std::string errorMsg = "Failed to initialize VDDK: ";
+            errorMsg += VixDiskLib_GetErrorText(err, NULL);
+            Napi::Error::New(env, errorMsg.c_str()).ThrowAsJavaScriptException();
             return;
         }
     }
 
     ~VddkWrapper() {
+        printf("\nCLOSED!\n");
         if (diskHandle) VixDiskLib_Close(diskHandle);
         if (connection) VixDiskLib_Disconnect(connection);
         VixDiskLib_Exit();
@@ -55,7 +60,7 @@ private:
 
     Napi::Value Connect(const Napi::CallbackInfo& info) {
         Napi::Env env = info.Env();
-        
+
         if (info.Length() < 4) {
             Napi::TypeError::New(env, "Wrong number of arguments").ThrowAsJavaScriptException();
             return env.Null();
@@ -66,25 +71,15 @@ private:
         std::string username = info[2].As<Napi::String>();
         std::string password = info[3].As<Napi::String>();
 
-        VixDiskLibConnectParams cnxParams;
-        memset(&cnxParams, 0, sizeof(cnxParams));
-        
-        cnxParams.vmxSpec = strdup(server.c_str());
-        cnxParams.serverName = strdup(server.c_str());
-        cnxParams.credType = VIXDISKLIB_CRED_UID;
-        cnxParams.creds.uid.userName = strdup(username.c_str());
-        cnxParams.creds.uid.password = strdup(password.c_str());
-        cnxParams.thumbPrint = strdup(thumbprint.c_str());
-        cnxParams.port = 443;
+        VixDiskLibConnectParams *cnxParams = VixDiskLib_AllocateConnectParams();
+        cnxParams->vmxSpec = strdup(server.c_str());
+        cnxParams->serverName = strdup(server.c_str());
+        cnxParams->credType = VIXDISKLIB_CRED_UID;
+        cnxParams->creds.uid.userName = strdup(username.c_str());
+        cnxParams->creds.uid.password = strdup(password.c_str());
+        cnxParams->thumbPrint = strdup(thumbprint.c_str());
+        VixError err = VixDiskLib_Connect(cnxParams, &connection);
 
-        VixError err = VixDiskLib_Connect(&cnxParams, &connection);
-        
-        // Free allocated strings
-        free((void*)cnxParams.vmxSpec);
-        free((void*)cnxParams.serverName);
-        free((void*)cnxParams.creds.uid.userName);
-        free((void*)cnxParams.creds.uid.password);
-        free((void*)cnxParams.thumbPrint);
 
         if (VIX_FAILED(err)) {
             std::string errorMsg = "Failed to connect: ";
@@ -98,31 +93,31 @@ private:
 
     Napi::Value Disconnect(const Napi::CallbackInfo& info) {
         Napi::Env env = info.Env();
-        
+
         if (connection) {
             VixDiskLib_Disconnect(connection);
             connection = NULL;
         }
-        
+
         return Napi::Boolean::New(env, true);
     }
 
     Napi::Value OpenDisk(const Napi::CallbackInfo& info) {
         Napi::Env env = info.Env();
-        
+
         if (info.Length() < 1) {
             Napi::TypeError::New(env, "Wrong number of arguments").ThrowAsJavaScriptException();
             return env.Null();
         }
 
         std::string path = info[0].As<Napi::String>();
-        
+
         // VDDK 8 uses transport modes directly in Open call
-        VixError err = VixDiskLib_Open(connection, 
-                                      path.c_str(), 
+        VixError err = VixDiskLib_Open(connection,
+                                      path.c_str(),
                                       VIXDISKLIB_FLAG_OPEN_UNBUFFERED | VIXDISKLIB_FLAG_OPEN_SINGLE_LINK,
                                       &diskHandle);
-        
+
         if (VIX_FAILED(err)) {
             std::string errorMsg = "Failed to open disk: ";
             errorMsg += VixDiskLib_GetErrorText(err, NULL);
@@ -135,18 +130,18 @@ private:
 
     Napi::Value CloseDisk(const Napi::CallbackInfo& info) {
         Napi::Env env = info.Env();
-        
+
         if (diskHandle) {
             VixDiskLib_Close(diskHandle);
             diskHandle = NULL;
         }
-        
+
         return Napi::Boolean::New(env, true);
     }
 
     Napi::Value Read(const Napi::CallbackInfo& info) {
         Napi::Env env = info.Env();
-        
+
         if (info.Length() < 2) {
             Napi::TypeError::New(env, "Wrong number of arguments").ThrowAsJavaScriptException();
             return env.Null();
@@ -159,7 +154,7 @@ private:
         // Use unsigned char buffer as required by VDDK 8
         uint8_t* buffer = new uint8_t[length];
         VixError err = VixDiskLib_Read(diskHandle, sectorNum, sectorCount, buffer);
-        
+
         if (VIX_FAILED(err)) {
             delete[] buffer;
             std::string errorMsg = "Failed to read: ";
@@ -176,7 +171,7 @@ private:
 
     Napi::Value Write(const Napi::CallbackInfo& info) {
         Napi::Env env = info.Env();
-        
+
         if (info.Length() < 2) {
             Napi::TypeError::New(env, "Wrong number of arguments").ThrowAsJavaScriptException();
             return env.Null();
@@ -192,7 +187,7 @@ private:
         }
 
         VixError err = VixDiskLib_Write(diskHandle, sectorNum, sectorCount, buffer.Data());
-        
+
         if (VIX_FAILED(err)) {
             std::string errorMsg = "Failed to write: ";
             errorMsg += VixDiskLib_GetErrorText(err, NULL);
